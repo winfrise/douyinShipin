@@ -6,7 +6,7 @@ import "./style.css";
 import "amfe-flexible";
 import App from "./App.vue";
 import router from "./router/index";
-import { Popup, Toast, setToastDefaultOptions } from "vant";
+import { Popup, Toast, setToastDefaultOptions, Lazyload } from "vant";
 setToastDefaultOptions({ duration: 800 }); //修改轻提示默认配置
 import "vant/es/toast/style"; //轻提示样式
 
@@ -19,4 +19,5 @@ app.use(Popup);
 app.use(Toast);
 app.use(router);
 app.use(pinia);
+app.use(Lazyload);
 app.mount("#app");

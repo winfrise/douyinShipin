@@ -10,7 +10,7 @@
         </template>
 
         <template v-else-if="type === 'img'">
-            <van-image width="100px" height="100px" lazy-load :src="imgUrl" fit="contain" />
+            <van-image width="100%" height="100%" lazy-load :src="imgUrl" fit="contain" />
         </template>
 
         <template v-else>
