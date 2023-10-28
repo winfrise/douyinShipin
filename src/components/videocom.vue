@@ -11,14 +11,14 @@
             @drag-start="dragStart"
             @drag-end="dragEnd" 
         >
-            <van-swipe-item v-for="(item, i) in fileList" :key="i">
+            <van-swipe-item v-for="(item, index) in fileList" :key="index">
                 <div style="width: 100%; height: calc(100% - 55px);"
                     @touchstart="touchStart" 
                     @touchend="touchEnd"
                 >
-                    <Item ref="itemRefs" 
+                    <Item :ref="(el) => itemRefs[index] = el" 
                         v-bind="item" 
-                        :index="i" 
+                        :index="index" 
                         :playMuted="playMuted" 
                         :playShow="playShow" 
                         @muted="handleMuted" 
@@ -226,7 +226,7 @@ function videoPlay(i) {
 // 点击解除静音
 const handleMuted = () => {
     playMuted.value = !playMuted.value
-    playShow.value = !playShow.value
+    // playShow.value = !playShow.value
 }
 // 触摸开始(左右滑动)
 function touchStart(e) {
@@ -274,11 +274,15 @@ function changeTabs(flag) {
 }
 // 上下滑动开始触发
 function dragStart({index}) {
+    console.log('startIndex', index)
+    console.log(itemRefs.value[index])
     itemRefs.value[index].pause()
     playShow.value = false
 }
 // 上下滑动结束触发
 function dragEnd({index}) {
+    console.log('endIndex', index)
+    console.log(itemRefs.value[index])
     itemRefs.value[index].play()
     playIndex.value = index
     chatIndex.value = index  //当前视频的评论索引

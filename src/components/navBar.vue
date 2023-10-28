@@ -14,7 +14,7 @@
             -->
 
             <i class="nav-item" v-for="(item) in douyinStore.navList" :key="item.name"
-                :class="item.name === douyinStore.navName ? 'activeColor' : ''" 
+                :class="{activeColor: item.name === douyinStore.navName}" 
                 @click="handleTabNav(item.name)"
             >{{ item.label }}</i>
         </div>

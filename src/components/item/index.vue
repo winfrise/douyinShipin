@@ -32,6 +32,7 @@
         <div class="muted"
             :class="playShow ? '' : 'roteActive'" 
             @click.stop="emits('muted')"
+            @touchstart.stop
         >
             <van-icon name="volume" size="28" />
             <template v-if="playMuted">
@@ -87,6 +88,7 @@ const itemVideoRef = ref()
 const play = () => {
     console.log('play')
     if (props.type === 'video') {
+        console.log(props.videoUrl)
         console.log(itemVideoRef.value)
         itemVideoRef.value.play()
     }
@@ -99,6 +101,7 @@ const handlePlay = () => {
 const pause = () => {
     console.log('pause')
     if (props.type === 'video') {
+        console.log(props.videoUrl)
         itemVideoRef.value.pause()
     }
 }
