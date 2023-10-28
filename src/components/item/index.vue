@@ -22,10 +22,10 @@
         <!-- 简介 -->
         <div class="video-text">
             <div class="title">
-                <h4 @click.stop="jump()">@{{ name }}</h4>
-                <i>{{ time }}</i>
+                <!-- <h4 @click.stop="jump()">@{{ name }}</h4> -->
+                <!-- <i>{{ time }}</i> -->
             </div>
-            <p>{{ text }}</p>
+            <!-- <p>{{ text }}</p> -->
         </div>
 
         <!-- 静音 -->
@@ -34,8 +34,10 @@
             @click.stop="emits('muted')"
         >
             <van-icon name="volume" size="28" />
-            <div class="moutedslash"></div>
-            <div class="moutedslashs"></div>
+            <template v-if="playMuted">
+                <div class="moutedslash"></div>
+                <div class="moutedslashs"></div>
+            </template>
         </div>
     </div>
 </template>
@@ -83,6 +85,7 @@ const emits = defineEmits(['muted', 'play', 'pause'])
 const itemVideoRef = ref()
 
 const play = () => {
+    console.log('play')
     if (props.type === 'video') {
         console.log(itemVideoRef.value)
         itemVideoRef.value.play()
@@ -94,6 +97,7 @@ const handlePlay = () => {
 }
 
 const pause = () => {
+    console.log('pause')
     if (props.type === 'video') {
         itemVideoRef.value.pause()
     }
@@ -104,7 +108,7 @@ const handlePause = () => {
 }
 
 // 跳转至作者详情页
-function jump() {
+const jump = () => {
     if (props.workFlag) {
         router.go(-1)
     } else {

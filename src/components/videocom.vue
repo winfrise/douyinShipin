@@ -213,8 +213,8 @@ function videoPlay(i) {
 }
 // 点击解除静音
 const handleMuted = () => {
-    playMuted.value = false
-    playShow.value = false
+    playMuted.value = !playMuted.value
+    playShow.value = !playShow.value
 }
 // 触摸开始(左右滑动)
 function touchStart(e) {

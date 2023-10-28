@@ -1,6 +1,6 @@
 <template>
     <div class="video-wrapper">
-        <video ref="videoRef" preload="metadata" class="video" loop
+        <video ref="videoRef" preload="metadata" class="video" loop controls
             :src="src"
             :muted="muted"
             @play="handlePlay()" 

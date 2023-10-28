@@ -12,7 +12,7 @@
         </div>
         <div>
             <van-icon @click.stop="handleChat()" name="chat" size="30" color="#fff" />
-            <p>{{ chatCount }}</p>
+            <p>0</p>
         </div>
         <div>
             <van-icon @click.stop="handlecollection(i)" name="star" size="30"
