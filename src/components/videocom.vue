@@ -11,7 +11,7 @@
             @drag-start="dragStart"
             @drag-end="dragEnd" 
         >
-            <van-swipe-item v-for="(item, i) in props.playsData.videos" :key="i">
+            <van-swipe-item v-for="(item, i) in fileList" :key="i">
                 <div style="width: 100%; height: calc(100% - 55px);"
                     @touchstart="touchStart" 
                     @touchend="touchEnd"
@@ -126,6 +126,18 @@ let props = defineProps({
     workFlag: {
         type: Boolean,
         default: false
+    }
+})
+
+import { arrayShuffle } from '@/utils/array-shuffle.js'
+const fileList = computed(() => {
+    switch(douyinStore.navName) {
+        case 'fileList':
+            return douyinStore.fileList || []
+        case 'randomList': 
+            return arrayShuffle(douyinStore.fileList || [])
+        default:
+            return []
     }
 })
 

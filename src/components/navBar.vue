@@ -4,12 +4,19 @@
         <van-icon @click="showToast('暂未开放')" name="apps-o" size="22" color="#fff" />
 
         <!-- 如果位于首页显示这个 -->
-        <div v-if="homeFlag">
+        <div class="nav-list" v-if="homeFlag">
+            <!-- 
             <i v-for="(item, i) in navData" 
                 :key="i" 
                 :class="i === douyinStore.navIndex ? 'activeColor' : ''" 
                 @click="handleTabs(i)"
-            >{{ item }}</i>
+            >{{ item }}</i> 
+            -->
+
+            <i class="nav-item" v-for="(item) in douyinStore.navList" :key="item.name"
+                :class="item.name === douyinStore.navName ? 'activeColor' : ''" 
+                @click="handleTabNav(item.name)"
+            >{{ item.label }}</i>
         </div>
 
         <!-- 右上角图标 -->
@@ -19,7 +26,7 @@
 </template>
 
 <script setup>
-import { reactive, watch } from 'vue'
+import { computed, reactive, watch } from 'vue'
 import { useRouter } from 'vue-router';
 import { useVideoStore } from '../store/videos'
 import { useDouyinStore } from '@/store/douyin'
@@ -66,6 +73,10 @@ watch(() => (douyinStore.navIndex), (newValue) => {
 
 }, { deep: true })
 
+
+const handleTabNav = (navName) => {
+    douyinStore.navName = navName
+}
 function handleTabs(i) {
     //将当前点击的标签传给父组件
     emits('changeTabs', true) 
@@ -92,15 +103,16 @@ function handleTabs(i) {
     width: 100%;
     height: 50px;
 
-    div {
+    .nav-list {
         width: 68%;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
 
-        i {
+        .nav-item {
             font-family: cursive;
             color: #fff;
             font-size: 16px;
+            margin: 0 10px;
         }
     }
 
