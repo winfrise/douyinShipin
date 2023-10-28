@@ -5,7 +5,7 @@
     <!-- 播放视频 -->
     <div class="content">
         <van-swipe style="height: 100%;" vertical 
-            :initial-swipe="playsData.swipeIndex" 
+            :initial-swipe="douyinStore.fileIndex" 
             :show-indicators="false"
             :lazy-render="true"
             @drag-start="dragStart"
@@ -285,6 +285,7 @@ function dragEnd({index}) {
     console.log(itemRefs.value[index])
     itemRefs.value[index].play()
     playIndex.value = index
+    douyinStore.fileIndex = index
     chatIndex.value = index  //当前视频的评论索引
     videoStore.$patch(() => {
         props.playsData.backHomeIndex = index

@@ -2,13 +2,13 @@
     <div class="wrapper">
         <van-button :disabled="loading" :loading="loading" type="primary" loading-text="扫描中..." block @click="handleScanDir()">扫描目录</van-button>
 
-        <van-button type="primary" plain to="/">路由跳转</van-button>
+        <van-button type="primary" plain icon="wap-home" to="/">跳转首页</van-button>
 
         <van-list
             :finished="true"
             finished-text="没有更多了"
         >
-            <van-cell v-for="item in douyinStore.fileList" :key="item">
+            <van-cell v-for="(item, index) in douyinStore.fileList" :key="item" @click.enter="jumpVideo(index)">
                 <template #title>
                     {{item.videoUrl || item.imgUrl || item.fileUrl }}
                 </template>
@@ -21,9 +21,11 @@
 <script setup>
 import { scanDir } from '@/api/douyin.js'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router';
 import { useDouyinStore } from '@/store/douyin'
 
-let douyinStore = useDouyinStore()
+const douyinStore = useDouyinStore()
+const router = useRouter()
 
 const loading = ref(false)
 
@@ -33,6 +35,11 @@ const handleScanDir = async () => {
     loading.value = false
 }
 
+const jumpVideo = (index) => {
+    douyinStore.navName = 'fileList'
+    douyinStore.fileIndex = index
+    router.push({path: '/'})
+}
 </script>
 
 <style lang="less" scoped>

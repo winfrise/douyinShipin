@@ -67,7 +67,8 @@ export const useDouyinStore = defineStore('douyin', {
       navName: 'fileList',
       navIndex: 1,
       resData: {},
-      fileList: []
+      fileList: [],
+      fileIndex: 0
     };
   },
   getters: {
