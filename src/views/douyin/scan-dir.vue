@@ -4,6 +4,13 @@
 
         <van-button type="primary" plain icon="wap-home" to="/">跳转首页</van-button>
 
+        <van-form @submit="handleSearch">
+            <van-field v-model="keywords" label="关键字" placeholder="请输入关键字" :rules="[{ required: true, message: '请输入关键字' }]" />
+            <van-button round block type="primary" native-type="submit">
+            搜索
+            </van-button>
+        </van-form>
+
         <van-list
             :finished="true"
             finished-text="没有更多了"
@@ -19,7 +26,7 @@
 </template>
 
 <script setup>
-import { scanDir } from '@/api/douyin.js'
+
 import { ref } from 'vue'
 import { useRouter } from 'vue-router';
 import { useDouyinStore } from '@/store/douyin'
@@ -27,6 +34,7 @@ import { useDouyinStore } from '@/store/douyin'
 const douyinStore = useDouyinStore()
 const router = useRouter()
 
+const keywords = ref('')
 const loading = ref(false)
 
 const handleScanDir = async () => {

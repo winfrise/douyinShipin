@@ -7,6 +7,16 @@ const getFileExt = (filePath) => {
   return filePath.match(/[^.]+$/g)[0];
 }
 
+const getFolder = (filePath) => {
+  const index = filePath.lastIndexOf('/')
+  return filePath.subString(0, index)
+}
+
+const getFileName = (filePath) => {
+  const index = filePath.lastIndexOf('/')
+  return filePath.subString(index)
+}
+
 const getFileType = (fileExt) => {
   const imgExts = ['jpg', 'gif', 'jpg', 'jpeg']
   const videoExts = ['mp4', 'mov', 'avi', 'mkv', 'flv', '3gp']
@@ -26,10 +36,14 @@ const flatFolder = (folder) => {
   if (folder.file_list) {
     folder.file_list.forEach(filePath => {
       const fileExt = getFileExt(filePath)
+      const folder = getFolder(filePath)
       const type =  getFileType(fileExt)
+      const fileName = getFileName(filePath)
       const item = {
+        user: folder,
         type,
         fileExt,
+        fileName,
         videoUrl: '',
         imgUrl: '',
         fileUrl: '',
@@ -60,12 +74,10 @@ const flatFolder = (folder) => {
 }
 
 export const useDouyinStore = defineStore('douyin', {
-  // state是一个函数 必须有返回值
   state() {
     return {
       navList: [{label: '文件列表', name: 'fileList'}, {label: '随机列表', name: 'randomList'}],
       navName: 'fileList',
-      navIndex: 1,
       resData: {},
       fileList: [],
       fileIndex: 0

@@ -29,6 +29,9 @@
 <script setup>
 import { computed  } from 'vue'
 const props = defineProps({
+    folder: {
+        type: String,
+    },
     imgUrl: {
         type: String,
         default: ''

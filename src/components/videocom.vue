@@ -460,38 +460,6 @@ const select = (e) => {
     }
 }
 
-// 视频介绍
-.video-text {
-    position: absolute;
-    left: 10px;
-    bottom: 12%;
-    color: #fff;
-    font-size: 16px;
-
-    .title {
-        display: flex;
-        align-items: baseline; //第一行文字基线对齐
-
-        h4 {
-            margin: 0 10px 10px 0;
-        }
-
-        i {
-            color: gray;
-        }
-    }
-
-
-    p {
-        margin: 0;
-        width: 250px;
-        overflow: hidden;
-        font-size: 14px;
-        font-family: cursive; //草书字体
-        word-wrap: break-word; //强制换行
-    }
-}
-
 
 
 .workBottom {

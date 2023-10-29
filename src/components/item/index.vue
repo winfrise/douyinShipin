@@ -17,16 +17,7 @@
             <ItemNoSupport />
         </template>
 
-        <RightInfo />
-    
-        <!-- 简介 -->
-        <div class="video-text">
-            <div class="title">
-                <!-- <h4 @click.stop="jump()">@{{ name }}</h4> -->
-                <!-- <i>{{ time }}</i> -->
-            </div>
-            <!-- <p>{{ text }}</p> -->
-        </div>
+        <RightInfo v-bind="item" />
 
         <!-- 静音 -->
         <div class="muted"
@@ -78,6 +69,9 @@ const props = defineProps({
     text: {
         type: String,
         default: ''
+    },
+    fileName: {
+        type: String
     }
 })
 
@@ -86,10 +80,7 @@ const emits = defineEmits(['muted', 'play', 'pause'])
 const itemVideoRef = ref()
 
 const play = () => {
-    console.log('play')
     if (props.type === 'video') {
-        console.log(props.videoUrl)
-        console.log(itemVideoRef.value)
         itemVideoRef.value.play()
     }
 }
@@ -99,9 +90,7 @@ const handlePlay = () => {
 }
 
 const pause = () => {
-    console.log('pause')
     if (props.type === 'video') {
-        console.log(props.videoUrl)
         itemVideoRef.value.pause()
     }
 }
