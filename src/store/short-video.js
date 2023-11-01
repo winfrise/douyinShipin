@@ -9,12 +9,12 @@ const getFileExt = (filePath) => {
 
 const getFolder = (filePath) => {
   const index = filePath.lastIndexOf('/')
-  return filePath.subString(0, index)
+  return filePath.substring(0, index)
 }
 
 const getFileName = (filePath) => {
   const index = filePath.lastIndexOf('/')
-  return filePath.subString(index)
+  return filePath.substring(index)
 }
 
 const getFileType = (fileExt) => {
@@ -32,9 +32,11 @@ const getFileType = (fileExt) => {
 }
 
 const flatFolder = (folder) => {
+  debugger
   const result = []
   if (folder.file_list) {
     folder.file_list.forEach(filePath => {
+      console.log('filePath', filePath)
       const fileExt = getFileExt(filePath)
       const folder = getFolder(filePath)
       const type =  getFileType(fileExt)
@@ -91,8 +93,7 @@ export const useShortVideoStore = defineStore('douyin', {
     async scanDir(params = {path: './'}) {
         const [err, res] = await scanDir(params)
         if (err) return
-        this.resData = res.data || {}
-        this.fileList = flatFolder(this.resData)
+        this.fileList = flatFolder(res.data || {})
         
         // videoStore.dramaData.videos = this.fileList
     },

@@ -20,7 +20,7 @@
         </div>
 
         <!-- 右上角图标 -->
-        <van-icon @click="router.push({path: '/douyin/scan-dir'})" name="setting-o" size="22" color="#fff" />
+        <van-icon @click="router.push({path: '/short-video/scan-dir'})" name="setting-o" size="22" color="#fff" />
     </div>
     <div></div>
 </template>

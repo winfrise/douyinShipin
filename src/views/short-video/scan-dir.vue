@@ -2,7 +2,7 @@
     <div class="wrapper">
         <van-button :disabled="loading" :loading="loading" type="primary" loading-text="扫描中..." block @click="handleScanDir()">扫描目录</van-button>
 
-        <van-button type="primary" plain icon="wap-home" to="/">跳转首页</van-button>
+        <van-button type="primary" plain icon="wap-home" to="/short-video/list">跳转首页</van-button>
 
         <van-form @submit="handleSearch">
             <van-field v-model="keywords" label="关键字" placeholder="请输入关键字" :rules="[{ required: true, message: '请输入关键字' }]" />
@@ -38,6 +38,7 @@ const keywords = ref('')
 const loading = ref(false)
 
 const handleScanDir = async () => {
+    debugger
     loading.value = true
     await shortVideoStore.scanDir({path: './uploads'})
     loading.value = false
