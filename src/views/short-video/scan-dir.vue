@@ -47,7 +47,7 @@ const handleScanDir = async () => {
 const jumpVideo = (index) => {
     shortVideoStore.navName = 'fileList'
     shortVideoStore.fileIndex = index
-    router.push({path: '/'})
+    router.push({path: '/short-video/list'})
 }
 </script>
 
