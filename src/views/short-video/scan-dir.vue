@@ -15,7 +15,7 @@
             :finished="true"
             finished-text="没有更多了"
         >
-            <van-cell v-for="(item, index) in douyinStore.fileList" :key="item" @click.enter="jumpVideo(index)">
+            <van-cell v-for="(item, index) in shortVideoStore.fileList" :key="item" @click.enter="jumpVideo(index)">
                 <template #title>
                     {{item.videoUrl || item.imgUrl || item.fileUrl }}
                 </template>
@@ -29,9 +29,9 @@
 
 import { ref } from 'vue'
 import { useRouter } from 'vue-router';
-import { useDouyinStore } from '@/store/douyin'
+import { useShortVideoStore } from '@/store/short-video'
 
-const douyinStore = useDouyinStore()
+const shortVideoStore = useShortVideoStore()
 const router = useRouter()
 
 const keywords = ref('')
@@ -39,13 +39,13 @@ const loading = ref(false)
 
 const handleScanDir = async () => {
     loading.value = true
-    await douyinStore.scanDir({path: './uploads'})
+    await shortVideoStore.scanDir({path: './uploads'})
     loading.value = false
 }
 
 const jumpVideo = (index) => {
-    douyinStore.navName = 'fileList'
-    douyinStore.fileIndex = index
+    shortVideoStore.navName = 'fileList'
+    shortVideoStore.fileIndex = index
     router.push({path: '/'})
 }
 </script>

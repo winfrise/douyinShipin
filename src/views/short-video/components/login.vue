@@ -58,8 +58,8 @@
 import { ref } from 'vue';
 import { showToast, closeToast } from 'vant'
 import { useRouter } from 'vue-router'
-import { useUserStore } from '../store/user'
-import { useVideoStore } from '../store/videos'
+import { useUserStore } from '@/store/user'
+import { useVideoStore } from '@/store/videos'
 
 // 定义数据
 let checked = ref(false)

@@ -29,9 +29,9 @@
                 <div>
                     <img :src="account.img" alt="">
                     <div>
-                        <p>{{ account.name }}
+                        <p>{{ account.name }}</p>
                         <p class="ptwo">{{ account.likeTotal }}获赞 • {{ account.fanTotal }}粉丝</p>
-                        </p>
+                        
                     </div>
                     <van-radio-group v-model="checked" checked-color="#f9476f">
                         <van-radio :name="checked"></van-radio>
@@ -50,7 +50,7 @@
 <script setup>
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
-import { useVideoStore } from '../store/videos'
+import { useVideoStore } from '@/store/videos'
 
 let videoStore = useVideoStore()
 

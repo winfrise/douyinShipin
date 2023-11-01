@@ -117,7 +117,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { showToast } from 'vant'
-import { useVideoStore } from '../store/videos';
+import { useVideoStore } from '@/store/videos';
 import { useRouter } from 'vue-router'
 
 // 定义数据

@@ -5,7 +5,7 @@
     <!-- 播放视频 -->
     <div class="content">
         <van-swipe style="height: 100%;" vertical 
-            :initial-swipe="douyinStore.fileIndex" 
+            :initial-swipe="shortVideoStore.fileIndex" 
             :show-indicators="false"
             :lazy-render="true"
             @drag-start="dragStart"
@@ -71,12 +71,12 @@
 </template>
 
 <script setup>
-import navBar from '../components/navBar.vue'
+import navBar from './navBar.vue'
 import { ref, getCurrentInstance, computed, watch } from 'vue';
 import { showToast } from 'vant'
 import { useRouter } from 'vue-router';
-import { useVideoStore } from '../store/videos'
-import { useDouyinStore } from '../store/douyin'
+import { useVideoStore } from '@/store/videos'
+import { useShortVideoStore } from '@/store/short-video'
 import { storeToRefs } from 'pinia';
 
 import Item from './item/index.vue'
@@ -114,7 +114,7 @@ let router = useRouter()
 
 // 获取pinia里的数据
 let videoStore = useVideoStore()
-const douyinStore = useDouyinStore()
+const shortVideoStore = useShortVideoStore()
 // 使pinia里state变成响应式数据
 let { musicData } = storeToRefs(videoStore)
 
@@ -131,11 +131,11 @@ let props = defineProps({
 
 import { arrayShuffle } from '@/utils/array-shuffle.js'
 const fileList = computed(() => {
-    switch(douyinStore.navName) {
+    switch(shortVideoStore.navName) {
         case 'fileList':
-            return douyinStore.fileList || []
+            return shortVideoStore.fileList || []
         case 'randomList': 
-            return arrayShuffle(douyinStore.fileList || [])
+            return arrayShuffle(shortVideoStore.fileList || [])
         default:
             return []
     }
@@ -242,9 +242,9 @@ function touchEnd(e) {
         if (deltaX >= 0) {
             console.log("右滑")
             playShow.value = false
-            if (douyinStore.navIndex !== 0) {
+            if (shortVideoStore.navIndex !== 0) {
                 videoStore.$patch(() => {
-                    douyinStore.navIndex--
+                    shortVideoStore.navIndex--
                 })
             } else {
                 showToast('前面没有咯~')
@@ -252,8 +252,8 @@ function touchEnd(e) {
         } else {
             console.log('左滑');
             playShow.value = false
-            if (douyinStore.navIndex !== 3) {
-                douyinStore.navIndex++
+            if (shortVideoStore.navIndex !== 3) {
+                shortVideoStore.navIndex++
             } else {
                 //跳转到作者页面
                 router.push({
@@ -285,7 +285,7 @@ function dragEnd({index}) {
     console.log(itemRefs.value[index])
     itemRefs.value[index].play()
     playIndex.value = index
-    douyinStore.fileIndex = index
+    shortVideoStore.fileIndex = index
     chatIndex.value = index  //当前视频的评论索引
     videoStore.$patch(() => {
         props.playsData.backHomeIndex = index

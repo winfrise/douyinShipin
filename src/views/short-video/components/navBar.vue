@@ -8,13 +8,13 @@
             <!-- 
             <i v-for="(item, i) in navData" 
                 :key="i" 
-                :class="i === douyinStore.navIndex ? 'activeColor' : ''" 
+                :class="i === shortVideoStore.navIndex ? 'activeColor' : ''" 
                 @click="handleTabs(i)"
             >{{ item }}</i> 
             -->
 
-            <i class="nav-item" v-for="(item) in douyinStore.navList" :key="item.name"
-                :class="{activeColor: item.name === douyinStore.navName}" 
+            <i class="nav-item" v-for="(item) in shortVideoStore.navList" :key="item.name"
+                :class="{activeColor: item.name === shortVideoStore.navName}" 
                 @click="handleTabNav(item.name)"
             >{{ item.label }}</i>
         </div>
@@ -28,11 +28,11 @@
 <script setup>
 import { computed, reactive, watch } from 'vue'
 import { useRouter } from 'vue-router';
-import { useVideoStore } from '../store/videos'
-import { useDouyinStore } from '@/store/douyin'
+import { useVideoStore } from '@/store/videos'
+import { useShortVideoStore } from '@/store/short-video'
 import { showToast } from 'vant';
 
-const douyinStore = useDouyinStore()
+const shortVideoStore = useShortVideoStore()
 const router = useRouter()
 
 
@@ -51,7 +51,7 @@ let videoStore = useVideoStore()
 videoStore.handleRecom() // 触发actions
 
 // 监听视频分类的值做出相应操作
-watch(() => (douyinStore.navIndex), (newValue) => {
+watch(() => (shortVideoStore.navIndex), (newValue) => {
     videoStore.$patch(() => {
         // 推荐
         if (newValue === 3) {
@@ -60,7 +60,7 @@ watch(() => (douyinStore.navIndex), (newValue) => {
             // videoStore.playsData = videoStore.dramaData
             videoStore.playsData = {
                 ...videoStore.dramaData,
-                videos: douyinStore.fileList
+                videos: shortVideoStore.fileList
             }
         } else if (newValue === 1) { //风景类
             videoStore.playsData = videoStore.landscapeData
@@ -75,14 +75,14 @@ watch(() => (douyinStore.navIndex), (newValue) => {
 
 
 const handleTabNav = (navName) => {
-    douyinStore.navName = navName
+    shortVideoStore.navName = navName
 }
 function handleTabs(i) {
     //将当前点击的标签传给父组件
     emits('changeTabs', true) 
 
     videoStore.$patch(() => {
-        douyinStore.navIndex = i
+        shortVideoStore.navIndex = i
     })
 }
 

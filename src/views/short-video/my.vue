@@ -10,7 +10,7 @@
 import levelNavBar from '../components/levelNavBar.vue'
 import accountInfo from '../components/accountInfo.vue'
 import bottomBar from '../components/bottomBar.vue'
-import { useVideoStore } from '../store/videos'
+import { useVideoStore } from '@/store/videos'
 import { storeToRefs } from 'pinia';
 
 let videoStore = useVideoStore()

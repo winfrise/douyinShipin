@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { scanDir } from '@/api/douyin'
+import { scanDir, getFileTree } from '@/api/short-video'
 
 // import { useVideoStore } from './videos'
 // const videoStore = useVideoStore()
@@ -73,14 +73,15 @@ const flatFolder = (folder) => {
   return result
 }
 
-export const useDouyinStore = defineStore('douyin', {
+export const useShortVideoStore = defineStore('douyin', {
   state() {
     return {
       navList: [{label: '文件列表', name: 'fileList'}, {label: '随机列表', name: 'randomList'}],
       navName: 'fileList',
       resData: {},
       fileList: [],
-      fileIndex: 0
+      fileIndex: 0,
+      fileTree: []
     };
   },
   getters: {
@@ -94,6 +95,11 @@ export const useDouyinStore = defineStore('douyin', {
         this.fileList = flatFolder(this.resData)
         
         // videoStore.dramaData.videos = this.fileList
+    },
+    async getFileTree(params = {path: '.'}) {
+      const [err, res] = await getFileTree(params)
+      if (err) return
+      this.fileTree = res?.data?.file_tree ?? []
     }
   },
   persist: {
